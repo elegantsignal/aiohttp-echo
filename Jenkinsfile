@@ -7,7 +7,7 @@ pipeline {
         stage('Building image and Deploy to Docker Hub') {
             steps{
                 script {
-                    docker.withRegistry('', "$DOCKER_HUB") {
+                    withDockerRegistry([ credentialsId: "4a103414-c8be-4efd-b1f9-21c017c5d437", url: "" ]){
                     def dockerImage = docker.build("$DOCKER_IMAGE:$BUILD_NUMBER")
                     dockerImage.push()
                     }
